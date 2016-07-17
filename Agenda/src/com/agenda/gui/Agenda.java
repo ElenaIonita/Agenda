@@ -1,13 +1,38 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * GUI Agend
  */
 package com.agenda.gui;
 
+import com.agenda.entity.Subscriber;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.SplashScreen;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JSeparator;
+import javax.swing.Timer;
+
 /**
  *
- * @author BSH
+ * @author Elena Ionita
  */
 public class Agenda extends javax.swing.JFrame {
 
@@ -27,21 +52,401 @@ public class Agenda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldSearch = new javax.swing.JTextField();
+        jButtonSearch = new javax.swing.JButton();
+        jButtonReset = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jButtonAdd = new javax.swing.JButton();
+        jButtonRemove = new javax.swing.JButton();
+        jButtonEdit = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jMenuBar = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
+        jRadioButtonFileOpen = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonFileSave = new javax.swing.JRadioButtonMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jRadioButtonFileExit = new javax.swing.JRadioButtonMenuItem();
+        subscriberMenu = new javax.swing.JMenu();
+        jRadioButtonSubscriberAdd = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonSubscriberEdit = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonSubcriberSearch = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonSubscriberDelete = new javax.swing.JRadioButtonMenuItem();
+        helpMenu = new javax.swing.JMenu();
+        jRadioButtonHelpLogIn = new javax.swing.JRadioButtonMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jRadioButtonHelpAbout = new javax.swing.JRadioButtonMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "First name", "Last name", "CNP", "Mobile No."
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable);
+        if (jTable.getColumnModel().getColumnCount() > 0) {
+            jTable.getColumnModel().getColumn(0).setMinWidth(3);
+        }
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resurces/icons/search.png"))); // NOI18N
+        jPanel2.add(jLabel1);
+
+        jTextFieldSearch.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSearchActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jTextFieldSearch);
+
+        jButtonSearch.setText("Search");
+        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonSearch);
+
+        jButtonReset.setText("Reset");
+        jButtonReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonResetActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonReset);
+
+        jButtonAdd.setText("Add");
+        jButtonAdd.setPreferredSize(new java.awt.Dimension(55, 23));
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddActionPerformed(evt);
+            }
+        });
+
+        jButtonRemove.setText("Remove");
+        jButtonRemove.setPreferredSize(new java.awt.Dimension(55, 23));
+        jButtonRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoveActionPerformed(evt);
+            }
+        });
+
+        jButtonEdit.setText("Edit");
+
+        jButton1.setText("First name");
+
+        jButton2.setText("Last name");
+
+        jButton3.setText("CNP");
+
+        jButton4.setText("Mobile No.");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resurces/icons/sort_descending.png"))); // NOI18N
+        jLabel2.setText("Sort by:");
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resurces/icons/phone-book-icone-4703-64.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonRemove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonEdit)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonRemove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
+                .addGap(18, 18, 18))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(109, 109, 109)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(38, 38, 38))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        fileMenu.setText("File");
+        fileMenu.setPreferredSize(new java.awt.Dimension(30, 19));
+
+        jRadioButtonFileOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jRadioButtonFileOpen.setSelected(true);
+        jRadioButtonFileOpen.setText("Open");
+        jRadioButtonFileOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resurces/icons/open-icon.png"))); // NOI18N
+        jRadioButtonFileOpen.setPreferredSize(new java.awt.Dimension(200, 22));
+        jRadioButtonFileOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonFileOpenActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jRadioButtonFileOpen);
+
+        jRadioButtonFileSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jRadioButtonFileSave.setSelected(true);
+        jRadioButtonFileSave.setText("Save");
+        jRadioButtonFileSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resurces/icons/save.png"))); // NOI18N
+        fileMenu.add(jRadioButtonFileSave);
+        fileMenu.add(jSeparator1);
+
+        jRadioButtonFileExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        jRadioButtonFileExit.setSelected(true);
+        jRadioButtonFileExit.setText("Exit");
+        jRadioButtonFileExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resurces/icons/application_exit.png"))); // NOI18N
+        jRadioButtonFileExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonFileExitActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jRadioButtonFileExit);
+
+        jMenuBar.add(fileMenu);
+
+        subscriberMenu.setText("Subscriber");
+        subscriberMenu.setPreferredSize(new java.awt.Dimension(70, 19));
+
+        jRadioButtonSubscriberAdd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
+        jRadioButtonSubscriberAdd.setSelected(true);
+        jRadioButtonSubscriberAdd.setText("Add ");
+        jRadioButtonSubscriberAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resurces/icons/user_male_add.png"))); // NOI18N
+        jRadioButtonSubscriberAdd.setPreferredSize(new java.awt.Dimension(200, 22));
+        subscriberMenu.add(jRadioButtonSubscriberAdd);
+
+        jRadioButtonSubscriberEdit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
+        jRadioButtonSubscriberEdit.setSelected(true);
+        jRadioButtonSubscriberEdit.setText("Edit");
+        jRadioButtonSubscriberEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resurces/icons/edit.png"))); // NOI18N
+        jRadioButtonSubscriberEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonSubscriberEditActionPerformed(evt);
+            }
+        });
+        subscriberMenu.add(jRadioButtonSubscriberEdit);
+
+        jRadioButtonSubcriberSearch.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
+        jRadioButtonSubcriberSearch.setSelected(true);
+        jRadioButtonSubcriberSearch.setText("Search");
+        jRadioButtonSubcriberSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resurces/icons/search.png"))); // NOI18N
+        subscriberMenu.add(jRadioButtonSubcriberSearch);
+
+        jRadioButtonSubscriberDelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
+        jRadioButtonSubscriberDelete.setSelected(true);
+        jRadioButtonSubscriberDelete.setText("Delete");
+        jRadioButtonSubscriberDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resurces/icons/delete.png"))); // NOI18N
+        jRadioButtonSubscriberDelete.setPreferredSize(new java.awt.Dimension(115, 22));
+        jRadioButtonSubscriberDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonSubscriberDeleteActionPerformed(evt);
+            }
+        });
+        subscriberMenu.add(jRadioButtonSubscriberDelete);
+
+        jMenuBar.add(subscriberMenu);
+
+        helpMenu.setText("Help");
+        helpMenu.setPreferredSize(new java.awt.Dimension(50, 19));
+
+        jRadioButtonHelpLogIn.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, java.awt.event.InputEvent.CTRL_MASK));
+        jRadioButtonHelpLogIn.setSelected(true);
+        jRadioButtonHelpLogIn.setText("Log in");
+        jRadioButtonHelpLogIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resurces/icons/key.png"))); // NOI18N
+        jRadioButtonHelpLogIn.setPreferredSize(new java.awt.Dimension(200, 22));
+        jRadioButtonHelpLogIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonHelpLogInActionPerformed(evt);
+            }
+        });
+        helpMenu.add(jRadioButtonHelpLogIn);
+        helpMenu.add(jSeparator2);
+
+        jRadioButtonHelpAbout.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
+        jRadioButtonHelpAbout.setSelected(true);
+        jRadioButtonHelpAbout.setText("About");
+        jRadioButtonHelpAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resurces/icons/Get info.png"))); // NOI18N
+        helpMenu.add(jRadioButtonHelpAbout);
+
+        jMenuBar.add(helpMenu);
+
+        setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jRadioButtonFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFileExitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonFileExitActionPerformed
+
+    private void jRadioButtonFileOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFileOpenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonFileOpenActionPerformed
+
+    private void jRadioButtonSubscriberEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonSubscriberEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonSubscriberEditActionPerformed
+
+    private void jRadioButtonSubscriberDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonSubscriberDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonSubscriberDeleteActionPerformed
+
+    private void jRadioButtonHelpLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonHelpLogInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonHelpLogInActionPerformed
+
+    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSearchActionPerformed
+
+    private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonResetActionPerformed
+
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAddActionPerformed
+
+    private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRemoveActionPerformed
+
+    private void jTextFieldSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldSearchActionPerformed
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -79,5 +484,40 @@ public class Agenda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenu helpMenu;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonAdd;
+    private javax.swing.JButton jButtonEdit;
+    private javax.swing.JButton jButtonRemove;
+    private javax.swing.JButton jButtonReset;
+    private javax.swing.JButton jButtonSearch;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonFileExit;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonFileOpen;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonFileSave;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonHelpAbout;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonHelpLogIn;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonSubcriberSearch;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonSubscriberAdd;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonSubscriberDelete;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonSubscriberEdit;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JTable jTable;
+    private javax.swing.JTextField jTextFieldSearch;
+    private javax.swing.JMenu subscriberMenu;
     // End of variables declaration//GEN-END:variables
 }
